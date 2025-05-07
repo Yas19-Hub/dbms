@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Library Management System</h1>
+        <p>DBMS Mini Project</p>
+    </header>
+    
+    <nav>
+        <a href="#" id="navHome" class="active">Dashboard</a>
+        <a href="#" id="navBooks">Books</a>
+        <a href="#" id="navMembers">Members</a>
+        <a href="#" id="navTransactions">Transactions</a>
+        <a href="#" id="navReports">Reports</a>
+        <a href="#" id="navDatabase">Database Schema</a>
+    </nav>
+    
+    <div class="container">
+        <!-- Dashboard Section -->
+        <div id="dashboard" class="section">
+            <h2>System Dashboard</h2>
+            <div class="dashboard">
+                <div class="card">
+                    <h3>Books Summary</h3>
+                    <p>Total Books: <strong>1,245</strong></p>
+                    <p>Available Books: <strong>984</strong></p>
+                    <p>Books on Loan: <strong>261</strong></p>
+                    <p>Overdue Books: <strong>42</strong></p>
+                </div>
+                
+                <div class="card">
+                    <h3>Member Stats</h3>
+                    <p>Total Members: <strong>756</strong></p>
+                    <p>Active Members: <strong>612</strong></p>
+                    <p>New Members (This Month): <strong>24</strong></p>
+                </div>
+                
+                <div class="card">
+                    <h3>Recent Activity</h3>
+                    <p>Books Issued Today: <strong>18</strong></p>
+                    <p>Books Returned Today: <strong>15</strong></p>
+                    <p>Fine Collected Today: <strong>$42.50</strong></p>
+                </div>
+                
+                <div class="card">
+                    <h3>Quick Actions</h3>
+                    <button onclick="document.getElementById('issueModal').style.display='block'">Issue Book</button>
+                    <button onclick="document.getElementById('returnModal').style.display='block'" style="margin-top: 10px;">Return Book</button>
+                    <button onclick="document.getElementById('addBookModal').style.display='block'" style="margin-top: 10px;">Add New Book</button>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Recent Transactions</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Transaction ID</th>
+                            <th>Book Title</th>
+                            <th>Member Name</th>
+                            <th>Type</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>T10045</td>
+                            <td>Database System Concepts</td>
+                            <td>John Smith</td>
+                            <td>Issue</td>
+                            <td>2025-05-06</td>
+                            <td>Completed</td>
+                        </tr>
+                        <tr>
+                            <td>T10044</td>
+                            <td>Fundamentals of Database Systems</td>
+                            <td>Lisa Johnson</td>
+                            <td>Return</td>
+                            <td>2025-05-06</td>
+                            <td>Completed</td>
+                        </tr>
+                        <tr>
+                            <td>T10043</td>
+                            <td>SQL for Beginners</td>
+                            <td>Michael Brown</td>
+                            <td>Issue</td>
+                            <td>2025-05-05</td>
+                            <td>Completed</td>
+                        </tr>
+                        <tr>
+                            <td>T10042</td>
+                            <td>Database Design for Mere Mortals</td>
+                            <td>Sarah Williams</td>
+                            <td>Issue</td>
+                            <td>2025-05-05</td>
+                            <td>Completed</td>
+                        </tr>
+                        <tr>
+                            <td>T10041</td>
+                            <td>NoSQL Distilled</td>
+                            <td>James Wilson</td>
+                            <td>Return</td>
+                            <td>2025-05-04</td>
+                            <td>Fine Paid</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Books Section -->
+        <div id="books" class="section hidden">
+            <h2>Books Management</h2>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Search books by title, author, ISBN, category...">
+                <button>Search</button>
+            </div>
+            
+            <div class="card">
+                <h3>Books Inventory</h3>
+                <div class="alert alert-success">
+                    Query executed successfully. Showing 5 of 1,245 records.
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ISBN</th>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Category</th>
+                            <th>Publication Year</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>978-0072465631</td>
+                            <td>Database System Concepts</td>
+                            <td>Abraham Silberschatz</td>
+                            <td>Database Systems</td>
+                            <td>2019</td>
+                            <td>Available</td>
+                            <td>
+                                <button>Edit</button>
+                                <button>Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>978-0201760439</td>
+                            <td>Fundamentals of Database Systems</td>
+                            <td>Ramez Elmasri</td>
+                            <td>Database Systems</td>
+                            <td>2015</td>
+                            <td>Issued</td>
+                            <td>
+                                <button>Edit</button>
+                                <button>Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>978-0136108047</td>
+                            <td>Database Processing</td>
+                            <td>David Kroenke</td>
+                            <td>Database Systems</td>
+                            <td>2017</td>
+                            <td>Available</td>
+                            <td>
+                                <button>Edit</button>
+                                <button>Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>978-1449373320</td>
+                            <td>SQL Cookbook</td>
+                            <td>Anthony Molinaro</td>
+                            <td>SQL</td>
+                            <td>2020</td>
+                            <td>Available</td>
+                            <td>
+                                <button>Edit</button>
+                                <button>Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>978-0321884497</td>
+                            <td>Database Design for Mere Mortals</td>
+                            <td>Michael J. Hernandez</td>
+                            <td>Database Design</td>
+                            <td>2013</td>
+                            <td>Issued</td>
+                            <td>
+                                <button>Edit</button>
+                                <button>Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div style="margin-top: 1rem;">
+                    <button onclick="document.getElementById('addBookModal').style.display='block'">Add New Book</button>
+                    <button>Export to CSV</button>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Book Categories</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category ID</th>
+                            <th>Category Name</th>
+                            <th>Total Books</th>
+                            <th>Available Books</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>CAT001</td>
+                            <td>Database Systems</td>
+                            <td>245</td>
+                            <td>187</td>
+                            <td>
+                                <button>Edit</button>
+                                <button>View Books</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>CAT002</td>
+                            <td>Programming</td>
+                            <td>312</td>
+                            <td>253</td>
+                            <td>
+                                <button>Edit</button>
+                                <button>View Books</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>CAT003</td>
+                            <td>SQL</td>
+                            <td>128</td>
+                            <td>102</td>
+                            <td>
+                                <button>Edit</button>
+                                <button>View Books</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>CAT004</td>
+                            <td>Database Design</td>
+                            <td>175</td>
+                            <td>143</td>
+                            <td>
+                                <button>Edit</button>
+                                <button>View Books</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>CAT005</td>
+                            <td>NoSQL</td>
+                            <td>87</td>
+                            <td>72</td>
+                            <td>
+                                <button>Edit</button>
+                                <button>View Books</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="margin-top: 1rem;">
+                    <button>Add New Category</button>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>DBMS Implementation</h3>
+                <p><strong>Books Table Query:</strong></p>
+                <div class="db-query">
+<span class="keyword">SELECT</span> b.<span class="column">book_id</span>, b.<span class="column">isbn</span>, b.<span class="column">title</span>, b.<span class="column">author</span>, 
+       c.<span class="column">category_name</span>, b.<span class="column">publication_year</span>, 
+       <span class="keyword">CASE WHEN</span> t.<span class="column">transaction_id</span> <span class="keyword">IS NULL THEN</span> 'Available' <span class="keyword">ELSE</span> 'Issued' <span class="keyword">END AS</span> <span class="column">status</span>
+<span class="keyword">FROM</span> <span class="table">books</span> b
+<span class="keyword">LEFT JOIN</span> <span class="table">categories</span> c <span class="keyword">ON</span> b.<span class="column">category_id</span> = c.<span class="column">category_id</span>
+<span class="keyword">LEFT JOIN</span> (
+    <span class="keyword">SELECT</span> <span class="column">book_id</span>, <span class="column">transaction_id</span>
+    <span class="keyword">FROM</span> <span class="table">transactions</span>
+    <span class="keyword">WHERE</span> <span class="column">return_date</span> <span class="keyword">IS NULL</span>
+) t <span class="keyword">ON</span> b.<span class="column">book_id</span> = t.<span class="column">book_id</span>
+<span class="keyword">ORDER BY</span> b.<span class="column">title</span>
+<span class="keyword">LIMIT</span> 5;
+</div>
+                <p><strong>Categories Statistics Query:</strong></p>
+                <div class="db-query">
+<span class="keyword">SELECT</span> c.<span class="column">category_id</span>, c.<span class="column">category_name</span>,
+       <span class="keyword">COUNT</span>(b.<span class="column">book_id</span>) <span class="keyword">AS</span> <span class="column">total_books</span>,
+       <span class="keyword">SUM</span>(<span class="keyword">CASE WHEN</span> t.<span class="column">transaction_id</span> <span class="keyword">IS NULL THEN</span> 1 <span class="keyword">ELSE</span> 0 <span class="keyword">END</span>) <span class="keyword">AS</span> <span class="column">available_books</span>
+<span class="keyword">FROM</span> <span class="table">categories</span> c
+<span class="keyword">LEFT JOIN</span> <span class="table">books</span> b <span class="keyword">ON</span> c.<span class="column">category_id</span> = b.<span class="column">category_id</span>
+<span class="keyword">LEFT JOIN</span> (
+    <span class="keyword">SELECT</span> <span class="column">book_id</span>, <span class="column">transaction_id</span>
+    <span class="keyword">FROM</span> <span class="table">transactions</span>
+    <span class="keyword">WHERE</span> <span class="column">return_date</span> <span class="keyword">IS NULL</span>
+) t <span class="keyword">ON</span> b.<span class="column">book_id</span> = t.<span class="column">book_id</span>
+<span class="keyword">GROUP BY</span> c.<span class="column">category_id</span>, c.<span class="column">category_name</span>
+<span class="keyword">ORDER BY</span> c.<span class="column">category_name</span>;
+</div>
+            </div>
+        </div>
+        
+        <!-- Members Section -->
+        <div id="members" class="section hidden">
+            <h2>Members Management</h2>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Search members by ID, name, email, phone...">
+                <button>Search</button>
+            </div>
+            
+            <div class="card">
+                <h3>Members Directory</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Member ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Join Date</th>
+                            <th>Books Borrowed</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>MEM001</td>
+                            <td>John Smith</td>
+                            <td>john.smith@email.com</td>
+                            <td>555-123-4567</td>
+                            <td>2023-03-15</td>
+                            <td>2</td>
+                            <td>Active</td>
+                            <td>
+                                <button>View</button>
+                                <button>Edit</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>MEM002</td>
+                            <td>Lisa Johnson</td>
+                            <td>lisa.johnson@email.com</td>
+                            <td>555-234-5678</td>
+                            <td>2023-05-22</td>
+                            <td>0</td>
+                            <td>Active</td>
+                            <td>
+                                <button>View</button>
+                                <button>Edit</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>MEM003</td>
+                            <td>Michael Brown</td>
+                            <td>michael.brown@email.com</td>
+                            <td>555-345-6789</td>
+                            <td>2023-06-10</td>
+                            <td>1</td>
+                            <td>Active</td>
+                            <td>
+                                <button>View</button>
+                                <button>Edit</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>MEM004</td>
+                            <td>Sarah Williams</td>
+                            <td>sarah.williams@email.com</td>
+                            <td>555-456-7890</td>
+                            <td>2023-09-05</td>
+                            <td>1</td>
+                            <td>Active</td>
+                            <td>
+                                <button>View</button>
+                                <button>Edit</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>MEM005</td>
+                            <td>James Wilson</td>
+                            <td>james.wilson@email.com</td>
+                            <td>555-567-8901</td>
+                            <td>2024-01-20</td>
+                            <td>0</td>
+                            <td>Active</td>
+                            <td>
+                                <button>View</button>
+                                <button>Edit</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div style="margin-top: 1rem;">
+                    <button>Add New Member</button>
+                    <button>Export to CSV</button>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Member Activity</h3>
+                <div class="db-query">
+<span class="keyword">SELECT</span> m.<span class="column">member_id</span>, m.<span class="column">name</span>, m.<span class="column">email</span>,
+       <span class="keyword">COUNT</span>(t.<span class="column">transaction_id</span>) <span class="keyword">AS</span> <span class="column">total_transactions</span>,
+       <span class="keyword">SUM</span>(<span class="keyword">CASE WHEN</span> t.<span class="column">return_date</span> <span class="keyword">IS NULL THEN</span> 1 <span class="keyword">ELSE</span> 0 <span class="keyword">END</span>) <span class="keyword">AS</span> <span class="column">current_borrows</span>,
+       <span class="keyword">SUM</span>(<span class="keyword">CASE WHEN</span> t.<span class="column">due_date</span> < <span class="keyword">CURRENT_DATE</span> <span class="keyword">AND</span> t.<span class="column">return_date</span> <span class="keyword">IS NULL THEN</span> 1 <span class="keyword">ELSE</span> 0 <span class="keyword">END</span>) <span class="keyword">AS</span> <span class="column">overdue_books</span>,
+       <span class="keyword">COALESCE</span>(<span class="keyword">SUM</span>(f.<span class="column">amount</span>), 0) <span class="keyword">AS</span> <span class="column">total_fines</span>
+<span class="keyword">FROM</span> <span class="table">members</span> m
+<span class="keyword">LEFT JOIN</span> <span class="table">transactions</span> t <span class="keyword">ON</span> m.<span class="column">member_id</span> = t.<span class="column">member_id</span>
+<span class="keyword">LEFT JOIN</span> <span class="table">fines</span> f <span class="keyword">ON</span> t.<span class="column">transaction_id</span> = f.<span class="column">transaction_id</span>
+<span class="keyword">GROUP BY</span> m.<span class="column">member_id</span>, m.<span class="column">name</span>, m.<span class="column">email</span>
+<span class="keyword">ORDER BY</span> <span class="column">total_transactions</span> <span class="keyword">DESC</span>;
+</div>
+            </div>
+        </div>
+        
+        <!-- Transactions Section -->
+        <div id="transactions" class="section hidden">
+            <h2>Transactions Management</h2>
+            
+            <div class="card">
+                <h3>Recent Transactions</h3>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search transactions by ID, book, member...">
+                    <button>Search</button>
+                </div>
+                
+                <div class="tabs">
+                    <div class="tab active" onclick="showTab('all-transactions')">All Transactions</div>
+                    <div class="tab" onclick="showTab('issued-books')">Issued Books</div>
+                    <div class="tab" onclick="showTab('returned-books')">Returned Books</div>
+                    <div class="tab" onclick="showTab('overdue-books')">Overdue Books</div>
+                </div>
+                
+                <div id="all-transactions" class="tab-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Transaction ID</th>
+                                <th>Book Title</th>
+                                <th>Member Name</th>
+                                <th>Issue Date</th>
+                                <th>Due Date</th>
+                                <th>Return Date</th>
+                                <th>Status</th>
+                                <th>Fine</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>T10045</td>
+                                <td>Database System Concepts</td>
+                                <td>John Smith</td>
+                                <td>2025-05-06</td>
+                                <td>2025-05-20</td>
+                                <td>-</td>
+                                <td>Issued</td>
+                                <td>-</td>
+                                <td>
+                                    <button>Return</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>T10041</td>
+                                <td>NoSQL Distilled</td>
+                                <td>James Wilson</td>
+                                <td>2025-04-20</td>
+                                <td>2025-05-04</td>
+                                <td>2025-05-04</td>
+                                <td>Returned</td>
+                                <td>$5.00</td>
+                                <td>
+                                    <button>View</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div id="issued-books" class="tab-content hidden">
+                    <!-- Issued books content -->
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Transaction ID</th>
+                                <th>Book Title</th>
+                                <th>Member Name</th>
+                                <th>Issue Date</th>
+                                <th>Due Date</th>
+                                <th>Days Left</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>T10045</td>
+                                <td>Database System Concepts</td>
+                                <td>John Smith</td>
+                                <td>2025-05-06</td>
+                                <td>2025-05-20</td>
+                                <td>13</td>
+                                <td>
+                                    <button>Return</button>
+                                    <button>Extend</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>T10043</td>
+                                <td>SQL for Beginners</td>
+                                <td>Michael Brown</td>
+                                <td>2025-05-05</td>
+                                <td>2025-05-19</td>
+                                <td>12</td>
+                                <td>
+                                    <button>Return</button>
+                                    <button>Extend</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>T10042</td>
+                                <td>Database Design for Mere Mortals</td>
+                                <td>Sarah Williams</td>
+                                <td>2025-05-05</td>
+                                <td>2025-05-19</td>
+                                <td>12</td>
+                                <td>
+                                    <button>Return</button>
+                                    <button>Extend</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div id="returned-books" class="tab-content hidden">
+                    <!-- Returned books content -->
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Transaction ID</th>
+                                <th>Book Title</th>
+                                <th>Member Name</th>
+                                <th>Issue Date</th>
+                                <th>Due Date</th>
+                                <th>Return Date</th>
+                                <th>Fine</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>T10044</td>
+                                <td>Fundamentals of Database Systems</td>
+                                <td>Lisa Johnson</td>
+                                <td>2025-04-22</td>
+                                <td>2025-05-06</td>
+                                <td>2025-05-06</td>
+                                <td>-</td>
+                                <td>
+                                    <button>View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>T10041</td>
+                                <td>NoSQL Distilled</td>
+                                <td>James Wilson</td>
+                                <td>2025-04-20</td>
+                                <td>2025-05-04</td>
+                                <td>2025-05-04</td>
+                                <td>$5.00</td>
+                                <td>
+                                    <button>View</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div id="overdue-books" class="tab-content hidden">
+                    <!-- Overdue books content -->
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Transaction ID</th>
+                                <th>Book Title</th>
+                                <th>Member Name</th>
+                                <th>Issue Date</th>
+                                <th>Due Date</th>
+                                <th>Days Overdue</th>
+                                <th>Fine</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>T10030</td>
+                                <td>SQL: The Complete Reference</td>
+                                <td>Robert Davis</td>
+                                <td>2025-04-15</td>
+                                <td>2025-04-29</td>
+                                <td>8</td>
+                                <td>$8.00</td>
+                                <td>
+                                    <button>Return</button>
+                                    <button>Send Reminder</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>T10028</td>
+                                <td>Learning MySQL</td>
+                                <td>Emily Clark</td>
+                                <td>2025-04-10</td>
+                                <td>2025-04-24</td>
+                                <td>13</td>
+                                <td>$13.00</td>
+                                <td>
+                                    <button>Return</button>
+                                    <button>Send Reminder</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div style="margin-top: 1rem;">
+                    <button onclick="document.getElementById('issueModal').style.display='block'">Issue Book</button>
+                    <button onclick="document.getElementById('returnModal').style.display='block'">Return Book</button>
+                    <button>Export to CSV</button>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Transaction Analytics</h3>
+                <div class="db-query">
+<span class="keyword">SELECT</span>
+    <span class="keyword">DATE</span>(t.<span class="column">issue_date</span>) <span class="keyword">AS</span> <span class="column">transaction_date</span>,
+    <span class="keyword">COUNT</span>(<span class="keyword">CASE WHEN</span> t.<span class="column">return_date</span> <span class="keyword">IS NULL THEN</span> t.<span class="column">transaction_id</span> <span class="keyword">END</span>) <span class="keyword">AS</span> <span class="column">books_issued</span>,
+    <span class="keyword">COUNT</span>(<span class="keyword">CASE WHEN</span> t.<span class="column">return_date</span> <span class="keyword">IS NOT NULL AND</span> <span class="keyword">DATE</span>(t.<span class="column">return_date</span>) = <span class="keyword">DATE</span>(t.<span class="column">issue_date</span>) <span class="keyword">THEN</span> t.<span class="column">transaction_id</span> <span class="keyword">END</span>) <span class="keyword">AS</span> <span class="column">books_returned</span>,
+    <span class="keyword">COUNT</span>(<span class="keyword">DISTINCT</span> t.<span class="column">member_id</span>) <span class="keyword">AS</span> <span class="column">active_members</span>,
+    <span class="keyword">SUM</span>(f.<span class="column">amount</span>) <span class="keyword">AS</span> <span class="column">fines_collected</span>
+<span class="keyword">FROM</span> <span class="table">transactions</span> t
+<span class="keyword">LEFT JOIN</span> <span class="table">fines</span> f <span class="keyword">ON</span> t.<span class="column">transaction_id</span> = f.<span class="column">transaction_id</span> <span class="keyword">AND</span> f.<span class="column">payment_date</span> = <span class="keyword">DATE</span>(t.<span class="column">issue_date</span>)
+<span class="keyword">WHERE</span> t.<span class="column">issue_date</span> >= <span class="keyword">DATE_SUB</span>(<span class="keyword">CURRENT_DATE</span>, <span class="keyword">INTERVAL</span> 30 <span class="keyword">DAY</span>)
+<span class="keyword">GROUP BY</span> <span class="keyword">DATE</span>(t.<span class="column">issue_date</span>)
+<span class="keyword">ORDER BY</span> <span class="keyword">DATE</span>(t.<span class="column">issue_date</span>) <span class="keyword">DESC</span>;
+</div>
+            </div>
+        </div>
+        
+        <!-- Reports Section -->
+        <div id="reports" class="section hidden">
+            <h2>Reports & Analytics</h2>
+            
+            <div class="card">
+                <h3>Generate Reports</h3>
+                <div class="form-group">
+                    <label for="report-type">Report Type:</label>
+                    <select id="report-type">
+                        <option value="books-inventory">Books Inventory</option>
+                        <option value="circulation-stats">Circulation Statistics</option>
+                        <option value="member-activity">Member Activity</option>
+                        <option value="overdue-books">Overdue Books</option>
+                        <option value="fines-collection">Fines Collection</option>
+                        <option value="popular-books">Popular Books</option>
+                        <option value="category-wise">Category-wise Distribution</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="date-range">Date Range:</label>
+                    <select id="date-range">
+                        <option value="today">Today</option>
+                        <option value="this-week">This Week</option>
+                        <option value="this-month">This Month</option>
+                        <option value="last-month">Last Month</option>
+                        <option value="this-year">This Year</option>
+                        <option value="custom">Custom Range</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="custom-date-range" style="display: none;">
+                    <label for="start-date">Start Date:</label>
+                    <input type="date" id="start-date">
+                    
+                    <label for="end-date" style="margin-top: 10px;">End Date:</label>
+                    <input type="date" id="end-date">
+                </div>
+                
+                <div class="form-group">
+                    <label for="format">Export Format:</label>
+                    <select id="format">
+                        <option value="pdf">PDF</option>
+                        <option value="excel">Excel</option>
+                        <option value="csv">CSV</option>
+                    </select>
+                </div>
+                
+                <button>Generate Report</button>
+            </div>
+            
+            <div class="card">
+                <h3>Popular Books (Last 30 Days)</h3>
+                <div class="db-query">
+<span class="keyword">SELECT</span> b.<span class="column">title</span>, b.<span class="column">author</span>, c.<span class="column">category_name</span>,
+       <span class="keyword">COUNT</span>(t.<span class="column">transaction_id</span>) <span class="keyword">AS</span> <span class="column">issue_count</span>
+<span class="keyword">FROM</span> <span class="table">books</span> b
+<span class="keyword">JOIN</span> <span class="table">transactions</span> t <span class="keyword">ON</span> b.<span class="column">book_id</span> = t.<span class="column">book_id</span>
+<span class="keyword">JOIN</span> <span class="table">categories</span> c <span class="keyword">ON</span> b.<span class="column">category_id</span> = c.<span class="column">category_id</span>
+<span class="keyword">WHERE</span> t.<span class="column">issue_date</span> >= <span class="keyword">DATE_SUB</span>(<span class="keyword">CURRENT_DATE</span>, <span class="keyword">INTERVAL</span> 30 <span class="keyword">DAY</span>)
+<span class="keyword">GROUP BY</span> b.<span class="column">book_id</span>, b.<span class="column">title</span>, b.<span class="column">author</span>, c.<span class="column">category_name</span>
+<span class="keyword">ORDER BY</span> <span class="column">issue_count</span> <span class="keyword">DESC</span>
+<span class="keyword">LIMIT</span> 10;
+</div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Category</th>
+                            <th>Issue Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Database System Concepts</td>
+                            <td>Abraham Silberschatz</td>
+                            <td>Database Systems</td>
+                            <td>15</td>
+                        </tr>
+                        <tr>
+                            <td>SQL Cookbook</td>
+                            <td>Anthony Molinaro</td>
+                            <td>SQL</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td>MySQL and JSON</td>
+                            <td>Andrew Johnson</td>
+                            <td>Database Systems</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>Learning MongoDB</td>
+                            <td>Kristina Chodorow</td>
+                            <td>NoSQL</td>
+                            <td>9</td>
+                        </tr>
+                        <tr>
+                            <td>PostgreSQL for Beginners</td>
+                            <td>Richard Davis</td>
+                            <td>Database Systems</td>
+                            <td>8</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="card">
+                <h3>Fine Collection Analytics</h3>
+                <div class="db-query">
+<span class="keyword">SELECT</span> <span class="keyword">YEAR</span>(f.<span class="column">payment_date</span>) <span class="keyword">AS</span> <span class="column">year</span>, 
+       <span class="keyword">MONTH</span>(f.<span class="column">payment_date</span>) <span class="keyword">AS</span> <span class="column">month</span>,
+       <span class="keyword">SUM</span>(f.<span class="column">amount</span>) <span class="keyword">AS</span> <span class="column">total_fine</span>,
+       <span class="keyword">COUNT</span>(f.<span class="column">fine_id</span>) <span class="keyword">AS</span> <span class="column">fine_count</span>,
+       <span class="keyword">AVG</span>(f.<span class="column">amount</span>) <span class="keyword">AS</span> <span class="column">average_fine</span>,
+       <span class="keyword">MAX</span>(f.<span class="column">amount</span>) <span class="keyword">AS</span> <span class="column">max_fine</span>
+<span class="keyword">FROM</span> <span class="table">fines</span> f
+<span class="keyword">WHERE</span> f.<span class="column">payment_date</span> >= <span class="keyword">DATE_SUB</span>(<span class="keyword">CURRENT_DATE</span>, <span class="keyword">INTERVAL</span> 6 <span class="keyword">MONTH</span>)
+<span class="keyword">GROUP BY</span> <span class="keyword">YEAR</span>(f.<span class="column">payment_date</span>), <span class="keyword">MONTH</span>(f.<span class="column">payment_date</span>)
+<span class="keyword">ORDER BY</span> <span class="keyword">YEAR</span>(f.<span class="column">payment_date</span>) <span class="keyword">DESC</span>, <span class="keyword">MONTH</span>(f.<span class="column">payment_date</span>) <span class="keyword">DESC</span>;
+</div>
+            </div>
+        </div>
+        
+        <!-- Database Schema Section -->
+        <div id="database" class="section hidden">
+            <h2>Database Schema</h2>
+            
+            <div class="card">
+                <h3>Entity Relationship Diagram</h3>
+                <p>Below is the ER diagram representing the database schema of the Library Management System:</p>
+                
+                <div style="text-align: center; padding: 20px;">
+                    <img src="/api/placeholder/800/500" alt="ER Diagram Placeholder">
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Database Tables Schema</h3>
+                
+                <h4>1. Books</h4>
+                <div class="db-schema">
+CREATE TABLE books (
+    book_id INT PRIMARY KEY AUTO_INCREMENT,
+    isbn VARCHAR(20) UNIQUE NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    author VARCHAR(255) NOT NULL,
+    publisher VARCHAR(255),
+    publication_year INT,
+    category_id INT,
+    price DECIMAL(10, 2),
+    edition VARCHAR(50),
+    pages INT,
+    quantity INT DEFAULT 1,
+    available_quantity INT DEFAULT 1,
+    added_date DATE DEFAULT CURRENT_DATE,
+    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (category_id) REFERENCES categories(category_id)
+);
+                </div>
+                
+                <h4>2. Members</h4>
+                <div class="db-schema">
+CREATE TABLE members (
+    member_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    phone VARCHAR(20),
+    address TEXT,
+    join_date DATE DEFAULT CURRENT_DATE,
+    expiry_date DATE,
+    status ENUM('Active', 'Inactive', 'Suspended') DEFAULT 'Active',
+    max_books_allowed INT DEFAULT 3,
+    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+                </div>
+                
+                <h4>3. Categories</h4>
+                <div class="db-schema">
+CREATE TABLE categories (
+    category_id INT PRIMARY KEY AUTO_INCREMENT,
+    category_name VARCHAR(100) UNIQUE NOT NULL,
+    description TEXT,
+    created_date DATE DEFAULT CURRENT_DATE
+);
+                </div>
+                
+                <h4>4. Transactions</h4>
+                <div class="db-schema">
+CREATE TABLE transactions (
+    transaction_id INT PRIMARY KEY AUTO_INCREMENT,
+    book_id INT NOT NULL,
+    member_id INT NOT NULL,
+    issue_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    due_date DATE NOT NULL,
+    return_date DATETIME NULL,
+    issued_by INT,
+    notes TEXT,
+    FOREIGN KEY (book_id) REFERENCES books(book_id),
+    FOREIGN KEY (member_id) REFERENCES members(member_id),
+    FOREIGN KEY (issued_by) REFERENCES staff(staff_id)
+);
+                </div>
+                
+                <h4>5. Fines</h4>
+                <div class="db-schema">
+CREATE TABLE fines (
+    fine_id INT PRIMARY KEY AUTO_INCREMENT,
+    transaction_id INT NOT NULL,
+    amount DECIMAL(10, 2) NOT NULL,
+    payment_date DATE,
+    payment_status ENUM('Paid', 'Unpaid', 'Waived') DEFAULT 'Unpaid',
+    collected_by INT,
+    FOREIGN KEY (transaction_id) REFERENCES transactions(transaction_id),
+    FOREIGN KEY (collected_by) REFERENCES staff(staff_id)
+);
+                </div>
+                
+                <h4>6. Staff</h4>
+                <div class="db-schema">
+CREATE TABLE staff (
+    staff_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    phone VARCHAR(20),
+    role ENUM('Admin', 'Librarian', 'Assistant') NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    join_date DATE DEFAULT CURRENT_DATE,
+    status ENUM('Active', 'Inactive') DEFAULT 'Active',
+    last_login DATETIME
+);
+                </div>
+                
+                <h4>7. Reservations</h4>
+                <div class="db-schema">
+CREATE TABLE reservations (
+    reservation_id INT PRIMARY KEY AUTO_INCREMENT,
+    book_id INT NOT NULL,
+    member_id INT NOT NULL,
+    reservation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    status ENUM('Pending', 'Fulfilled', 'Cancelled') DEFAULT 'Pending',
+    notification_sent BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (book_id) REFERENCES books(book_id),
+    FOREIGN KEY (member_id) REFERENCES members(member_id)
+);
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Common Database Queries</h3>
+                
+                <h4>1. Book Availability Check</h4>
+                <div class="db-query">
+<span class="keyword">SELECT</span> b.<span class="column">book_id</span>, b.<span class="column">title</span>, b.<span class="column">author</span>, 
+       (b.<span class="column">quantity</span> - <span class="keyword">COUNT</span>(t.<span class="column">transaction_id</span>)) <span class="keyword">AS</span> <span class="column">available_copies</span>
+<span class="keyword">FROM</span> <span class="table">books</span> b
+<span class="keyword">LEFT JOIN</span> <span class="table">transactions</span> t <span class="keyword">ON</span> b.<span class="column">book_id</span> = t.<span class="column">book_id</span> <span class="keyword">AND</span> t.<span class="column">return_date</span> <span class="keyword">IS NULL</span>
+<span class="keyword">WHERE</span> b.<span class="column">title</span> <span class="keyword">LIKE</span> '%Database%'
+<span class="keyword">GROUP BY</span> b.<span class="column">book_id</span>, b.<span class="column">title</span>, b.<span class="column">author</span>, b.<span class="column">quantity</span>
+<span class="keyword">HAVING</span> (b.<span class="column">quantity</span> - <span class="keyword">COUNT</span>(t.<span class="column">transaction_id</span>)) > 0;
+</div>
+                
+                <h4>2. Overdue Books Query</h4>
+                <div class="db-query">
+<span class="keyword">SELECT</span> t.<span class="column">transaction_id</span>, b.<span class="column">title</span>, m.<span class="column">name</span> <span class="keyword">AS</span> <span class="column">member_name</span>, m.<span class="column">email</span>,
+       t.<span class="column">issue_date</span>, t.<span class="column">due_date</span>,
+       <span class="keyword">DATEDIFF</span>(<span class="keyword">CURRENT_DATE</span>, t.<span class="column">due_date</span>) <span class="keyword">AS</span> <span class="column">days_overdue</span>,
+       <span class="keyword">DATEDIFF</span>(<span class="keyword">CURRENT_DATE</span>, t.<span class="column">due_date</span>) * 1.00 <span class="keyword">AS</span> <span class="column">fine_amount</span>
+<span class="keyword">FROM</span> <span class="table">transactions</span> t
+<span class="keyword">JOIN</span> <span class="table">books</span> b <span class="keyword">ON</span> t.<span class="column">book_id</span> = b.<span class="column">book_id</span>
+<span class="keyword">JOIN</span> <span class="table">members</span> m <span class="keyword">ON</span> t.<span class="column">member_id</span> = m.<span class="column">member_id</span>
+<span class="keyword">WHERE</span> t.<span class="column">return_date</span> <span class="keyword">IS NULL</span> <span class="keyword">AND</span> t.<span class="column">due_date</span> < <span class="keyword">CURRENT_DATE</span>
+<span class="keyword">ORDER BY</span> <span class="column">days_overdue</span> <span class="keyword">DESC</span>;
+</div>
+                
+                <h4>3. Member Borrowing History</h4>
+                <div class="db-query">
+<span class="keyword">SELECT</span> t.<span class="column">transaction_id</span>, b.<span class="column">title</span>, b.<span class="column">author</span>,
+       t.<span class="column">issue_date</span>, t.<span class="column">due_date</span>, t.<span class="column">return_date</span>,
+       <span class="keyword">CASE WHEN</span> t.<span class="column">return_date</span> <span class="keyword">IS NULL AND</span> t.<span class="column">due_date</span> < <span class="keyword">CURRENT_DATE THEN</span> 'Overdue'
+            <span class="keyword">WHEN</span> t.<span class="column">return_date</span> <span class="keyword">IS NULL THEN</span> 'Issued'
+            <span class="keyword">ELSE</span> 'Returned'
+       <span class="keyword">END AS</span> <span class="column">status</span>,
+       f.<span class="column">amount</span> <span class="keyword">AS</span> <span class="column">fine_amount</span>,
+       f.<span class="column">payment_status</span>
+<span class="keyword">FROM</span> <span class="table">transactions</span> t
+<span class="keyword">JOIN</span> <span class="table">books</span> b <span class="keyword">ON</span> t.<span class="column">book_id</span> = b.<span class="column">book_id</span>
+<span class="keyword">LEFT JOIN</span> <span class="table">fines</span> f <span class="keyword">ON</span> t.<span class="column">transaction_id</span> = f.<span class="column">transaction_id</span>
+<span class="keyword">WHERE</span> t.<span class="column">member_id</span> = ?
+<span class="keyword">ORDER BY</span> t.<span class="column">issue_date</span> <span class="keyword">DESC</span>;
+</div>
+                
+                <h4>4. Popular Books Analysis</h4>
+                <div class="db-query">
+<span class="keyword">SELECT</span> b.<span class="column">title</span>, b.<span class="column">author</span>, c.<span class="column">category_name</span>,
+       <span class="keyword">COUNT</span>(t.<span class="column">transaction_id</span>) <span class="keyword">AS</span> <span class="column">borrow_count</span>
+<span class="keyword">FROM</span> <span class="table">books</span> b
+<span class="keyword">JOIN</span> <span class="table">transactions</span> t <span class="keyword">ON</span> b.<span class="column">book_id</span> = t.<span class="column">book_id</span>
+<span class="keyword">JOIN</span> <span class="table">categories</span> c <span class="keyword">ON</span> b.<span class="column">category_id</span> = c.<span class="column">category_id</span>
+<span class="keyword">WHERE</span> t.<span class="column">issue_date</span> >= <span class="keyword">DATE_SUB</span>(<span class="keyword">CURRENT_DATE</span>, <span class="keyword">INTERVAL</span> 3 <span class="keyword">MONTH</span>)
+<span class="keyword">GROUP BY</span> b.<span class="column">book_id</span>, b.<span class="column">title</span>, b.<span class="column">author</span>, c.<span class="column">category_name</span>
+<span class="keyword">ORDER BY</span> <span class="column">borrow_count</span> <span class="keyword">DESC</span>
+<span class="keyword">LIMIT</span> 10;
+</div>
+                
+                <h4>5. Category-wise Book Distribution</h4>
+                <div class="db-query">
+<span class="keyword">SELECT</span> c.<span class="column">category_name</span>,
+       <span class="keyword">COUNT</span>(b.<span class="column">book_id</span>) <span class="keyword">AS</span> <span class="column">total_books</span>,
+       <span class="keyword">SUM</span>(b.<span class="column">quantity</span>) <span class="keyword">AS</span> <span class="column">total_copies</span>,
+       <span class="keyword">SUM</span>(b.<span class="column">quantity</span>) - <span class="keyword">COUNT</span>(t.<span class="column">transaction_id</span>) <span class="keyword">AS</span> <span class="column">available_copies</span>,
+       <span class="keyword">AVG</span>(b.<span class="column">price</span>) <span class="keyword">AS</span> <span class="column">average_price</span>
+<span class="keyword">FROM</span> <span class="table">categories</span> c
+<span class="keyword">LEFT JOIN</span> <span class="table">books</span> b <span class="keyword">ON</span> c.<span class="column">category_id</span> = b.<span class="column">category_id</span>
+<span class="keyword">LEFT JOIN</span> <span class="table">transactions</span> t <span class="keyword">ON</span> b.<span class="column">book_id</span> = t.<span class="column">book_id</span> <span class="keyword">AND</span> t.<span class="column">return_date</span> <span class="keyword">IS NULL</span>
+<span class="keyword">GROUP BY</span> c.<span class="column">category_id</span>, c.<span class="column">category_name</span>
+<span class="keyword">ORDER BY</span> <span class="column"></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>T10044</td>
+                                <td>Fundamentals of Database Systems</td>
+                                <td>Lisa Johnson</td>
+                                <td>2025-04-22</td>
+                                <td>2025-05-06</td>
+                                <td>2025-05-06</td>
+                                <td>Returned</td>
+                                <td>-</td>
+                                <td>
+                                    <button>View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>T10043</td>
+                                <td>SQL for Beginners</td>
+                                <td>Michael Brown</td>
+                                <td>2025-05-05</td>
+                                <td>2025-05-19</td>
+                                <td>-</td>
+                                <td>Issued</td>
+                                <td>-</td>
+                                <td>
+                                    <button>Return</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>T10042</td>
+                                <td>Database Design for Mere Mortals</td>
+                                <td>Sarah Williams</td>
+                                <td>2025-05-05</td>
+                                <td>2025-05-19</td>
+                                <td>-</td>
+                                <td>Issued</td>
+                                <td>-</td>
+                                <td>
+                                    <button>Return
